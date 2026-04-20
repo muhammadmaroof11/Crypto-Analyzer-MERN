@@ -242,10 +242,23 @@ const Dashboard = () => {
 
         {/* Column 2: Center (Master Anchor) */}
         <div style={{ display: "flex", flexDirection: "column", gap: "30px" }}>
-            <div className="glass-panel panel-cyan" style={{ padding: "30px", height: "540px", display: "flex", flexDirection: "column" }}>
+            <div className="glass-panel panel-cyan" style={{ padding: "30px", height: "auto", display: "flex", flexDirection: "column" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
                     <div>
-                        <h3 style={{ margin: 0, fontSize: "18px" }}>{selectedCoin?.name || 'Perspective'}</h3>
+                        <div className="coin-selector-container">
+                            <h3 style={{ margin: 0, fontSize: "18px" }}>{selectedCoin?.name || 'Perspective'}</h3>
+                            <span className="chevron-icon">▼</span>
+                            <select 
+                                className="coin-select-hidden" 
+                                value={selectedCoin?.id || ''} 
+                                onChange={(e) => {
+                                    const coin = coins.find(c => c.id === e.target.value);
+                                    if (coin) setSelectedCoin(coin);
+                                }}
+                            >
+                                {coins.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                            </select>
+                        </div>
                         <p style={{ margin: "4px 0 0 0", fontSize: "11px", color: "#64748b" }}>24H MARKET TRAJECTORY</p>
                     </div>
                     {selectedCoin && (
@@ -257,7 +270,7 @@ const Dashboard = () => {
                         </button>
                     )}
                 </div>
-                <div className="chart-container" style={{ flex: 1 }}>
+                <div className="chart-container">
                     {isLoadingChart && <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 10 }}><Loader /></div>}
                     {historicalData.length > 0 ? <Line options={chartOptions} data={chartData} /> : <div style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center", color: "#475569" }}>Select asset to view metrics</div>}
                 </div>

@@ -13,8 +13,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar glass-panel" style={{ borderRadius: "0 0 20px 20px", borderTop: "none", display: "grid", gridTemplateColumns: "1.2fr 1fr 1.2fr", alignItems: "center", padding: "15px 40px" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "25px" }}>
+    <nav className="navbar glass-panel">
+      <div className="nav-brand" style={{ display: "flex", alignItems: "center", gap: "25px" }}>
         <h2 style={{ margin: 0, fontWeight: 800, letterSpacing: "1px", fontSize: "16px", borderRight: "1px solid rgba(255,255,255,0.1)", paddingRight: "25px" }}>
             CRYPTO<span style={{ color: "var(--accent-blue)" }}>ANALYZER</span>
         </h2>
