@@ -20,6 +20,12 @@ app.use("/api/auth", authRoute);
 app.use("/api/portfolio", portfolioRoute);
 app.use("/api/watchlist", watchlistRoute);
 
-app.listen(process.env.PORT || 5000, () => {
-  console.log("Server is running on port 5000");
+// Deployment Health Check
+app.get("/", (req, res) => {
+  res.send("🚀 CryptoAnalyzer Terminal API is Live");
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`✅ Server is running on port ${PORT}`);
 });
